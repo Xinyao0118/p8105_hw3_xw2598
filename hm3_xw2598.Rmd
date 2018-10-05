@@ -5,7 +5,63 @@ date: 2018-10-05
 output: github_document
 ---
 
+##problem1
+
 ```{r}
+#build a dataset
+devtools::install_github("p8105/p8105.datasets")
+library(p8105.datasets)
+library(tidyverse)
+library(ggridges)
+data(brfss_smart2010)
+brfss = brfss_smart2010 %>% 
+#data cleaning
+#rename variables
+  janitor::clean_names() %>% 
+#focus on the “Overall Health” topic
+  filter(topic == "Overall Health") %>% 
+#include only responses from “Excellent” to “Poor”  (1)???
+  select(year,locationabbr,locationdesc,response,data_value) %>% 
+#organize responses as a factor
+  mutate(
+    response = factor(response)
+  )
+head(brfss, 10)
+```
+
+
+```{r}
+#In 2002, which states were observed at 7 locations
+loc_brfss = brfss %>% 
+  group_by(year,locationabbr) %>% 
+  summarise(
+    count = n_distinct(locationdesc)
+    )
+  filter(loc_brfss,count == 7,year == 2002)
+```
+Comments: In 2002,CT,FL,NC were observed at 7 locations. I choose distinct specific locations which were observed in each state as the dataset, because from the original data each specific location were repetitive and the repetity doesn`t make sence in this question.
+
+```{r}
+#spaghetti plot
+ggplot(loc_brfss, aes(x = year, y = count, fill = locationabbr,color = locationabbr))+
+  geom_line() +
+  labs(
+    title = "Observations number in each state from 2002 to 2010 plot",
+    x = "year",
+    y = "Obervation numer"
+  )+
+  scale_color_hue(name = " state", h = c(0,360))
+#comments
+
 
 ```
 
+
+@Using this dataset, do or answer the following (commenting on the results of each):
+@Make a “spaghetti plot” that shows the number of observations in each state from 2002 to 2010.
+
+Make a table showing, for the years 2002, 2006, and 2010, the mean and standard deviation of the proportion of “Excellent” responses across locations in NY State.
+
+For each year and state, compute the average proportion in each response category (taking the average across locations in a state). Make a five-panel plot that shows, for each response category separately, the distribution of these state-level averages over time.
+
+ 
