@@ -7,7 +7,7 @@ output: github_document
 
 ##problem1
 
-```{r}
+```{r p1_dataset}
 #build a dataset
 devtools::install_github("p8105/p8105.datasets")
 library(p8105.datasets)
@@ -30,7 +30,7 @@ head(brfss, 10)
 ```
 
 
-```{r}
+```{r loc_count}
 #In 2002, which states were observed at 7 locations
 loc_brfss = brfss %>% 
   group_by(year,locationabbr) %>% 
@@ -41,7 +41,7 @@ loc_brfss = brfss %>%
 ```
 Comments: In 2002,CT,FL,NC were observed at 7 locations. I choose distinct specific locations  which were observed in each state as the dataset, because from the original data each specific location were repetitive and the repetity doesn`t make sence in this question.
 
-```{r}
+```{r spaghetti}
 #spaghetti plot
 ggplot(loc_brfss, aes(x = year, y = count, fill = locationabbr,color = locationabbr))+
   geom_line() +
@@ -56,7 +56,7 @@ ggplot(loc_brfss, aes(x = year, y = count, fill = locationabbr,color = locationa
 
 Comments:  Since the number of states is large, each state line is difficult to be distinguished. But the tendency for most of the observation number in each state is clear, which seems stable.For example, NY always has more observation counts than other states.And, only few states like FL seems to have huge waves in 2002-2010.It seemed like FL had a weird high observation count in 2007 and 2010. Meanwhile, differences between states` observation numbers are also stable, seen from this plot.  
 
-```{r}
+```{r ny_group}
 # For the years 2002, 2006, and 2010, the mean and standard deviation of the proportion of “Excellent” responses across locations in NY State
 ny_brfss = brfss %>% 
   ungroup() %>% 
@@ -71,7 +71,7 @@ ny_brfss = brfss %>%
 ```
 Comments: During 2002,2006,2010 in NY, the Westchester County and New York County had  high "excellent" proportion with the low sd value compared with other counties. Most counties have an "excellent" proportion higher than 20 except Erie County, Bronx County and Queens County. In sd column there are 3 NA value, which is because the related county only were observed only once in specific years(2002,2006,2010).
 
-```{r}
+```{r plot}
 
 #For each year and state,compute the average proportion in each response category
 tl_brfss = brfss %>% 
@@ -92,10 +92,36 @@ ggplot(tl_brfss,aes(x = year, y = averange, fill = locationabbr, color = locatio
   theme(axis.text = element_text(size = 4),
         legend.title = element_text(size = 4),
         legend.text = element_text(size = 3)
-
         )
 ```
 Comments:This plot shows (1)in each panel(response category),the differences between most state-level proportion averages keep within 10%. (2)Obvious differences between different panels, which shows a overall tendency for all states that the percentages of responses are arranged in descending order :"Very good" >"good" >"Excellent" >"Fair" >"Poor".
+
+
+##problem 2
+
+```{r p2_description_unfinished}
+#load data
+library(p8105.datasets)
+data(instacart)
+str(instacart)
+#write a short description of the dataset, noting the size and structure of the data, describing some key variables, and giving illstrative examples of observations.
+
+
+```
+The goal is to do some exploration of this dataset. To that end, write a short description of the dataset, noting the size and structure of the data, describing some key variables, and giving illstrative examples of observations.
+
+```{r p2_}
+#how many aisles are there, and which aisles are the most items ordered from?
+nrow(distinct(instacart, aisle))
+
+```
+Comments:
+(1)There are 134 aisles, and  
+Then, do or answer the following (commenting on the results of each):
+How many aisles are there, and which aisles are the most items ordered from?
+Make a plot that shows the number of items ordered in each aisle. Order aisles sensibly, and organize your plot so others can read it.
+Make a table showing the most popular item aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”
+Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).
 
 
 
