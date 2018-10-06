@@ -83,10 +83,22 @@ tl_brfss = brfss %>%
 ggplot(tl_brfss,aes(x = year, y = averange, fill = locationabbr, color = locationabbr))+
   geom_line()+
   facet_grid(. ~ response)+
-  theme(axis.text = element_text(size = 4))
+  labs(
+    title = "Distribution of each response`s state-level average proportion from 2002 to 2010",
+      x = "year",
+      y = "proportion(%)",
+      color = "States"
+  )+
+  theme(axis.text = element_text(size = 4),
+        legend.title = element_text(size = 4),
+        legend.text = element_text(size = 3)
+
+        )
+
 
 ```
-@For each year and state, compute the average proportion in each response category (taking the average across locations in a state).Make a five-panel plot that shows, for each response category separately, the distribution of these state-level averages over time.
+Comments:This plot shows (1)in each panel(response category),the differences between most state-level proportion averages keep within 10%. (2)Obvious differences between different panels, which shows a overall tendency for all states that the percentages of responses are arranged in descending order :"Very good" >"good" >"Excellent" >"Fair" >"Poor".
+
 
 
  
