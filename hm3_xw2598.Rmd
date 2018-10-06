@@ -94,8 +94,6 @@ ggplot(tl_brfss,aes(x = year, y = averange, fill = locationabbr, color = locatio
         legend.text = element_text(size = 3)
 
         )
-
-
 ```
 Comments:This plot shows (1)in each panel(response category),the differences between most state-level proportion averages keep within 10%. (2)Obvious differences between different panels, which shows a overall tendency for all states that the percentages of responses are arranged in descending order :"Very good" >"good" >"Excellent" >"Fair" >"Poor".
 
