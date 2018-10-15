@@ -111,9 +111,9 @@ str(instacart)
 
 ```
 
-This is a 1384617 rows * 15 cols dataset which indicates the information of costomers order details and their products` details. 
+This is a 1384617 rows * 15 cols dataset which indicates the information of costomers order details and their products details. 
 The key variables include days_since_prior_order(int), aisle_id(int), department_id(int) and so on.
-For example,in var 'days_since_prior_order', each value means the gap days from this costomer`s last order to this one. The var 'department_id' shows which departments each product belong to, which can be studied to explore which departments is most sold.
+For example,in var 'days_since_prior_order', each value means the gap days from this costomers last order to this one. The var 'department_id' shows which departments each product belong to, which can be studied to explore which departments is most sold.
 
 ```{r p2}
 #how many aisles are there, and which aisles are the most items ordered from?
