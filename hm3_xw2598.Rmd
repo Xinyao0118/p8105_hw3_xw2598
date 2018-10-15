@@ -253,8 +253,9 @@ filter(snow > 0 & snow<100) %>%
   theme(axis.text = element_text(size = 4.5) )
 
 ```
-Comments:
-(1)From the plot we can see the Tmin had a hign density in (-15,15), Tmax had a hign density in (0,30). And excluding outliers, Tmin mainly ranged from (-45,45), Tmax mainly ranged from (-30,40). We can also make a stardard for excluding outliers in this plot because the whole dara were crowded, those obviously were out of range can be seen as outliers. 
 
-Make a two-panel plot showing (i) tmax vs tmin for the full dataset (note that a scatterplot may not be the best option);and (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
+Comments:
+(1)From the hex plot we can see the Tmin had a hign density in (-15,15), Tmax had a hign density in (0,30). And excluding outliers, Tmin mainly ranged from (-45,45), Tmax mainly ranged from (-30,40). We can also make a stardard for excluding outliers in this plot because the whole dara were crowded, those obviously were out of range can be seen as outliers. 
+(2)From the violin plot we can see that the distribution of snowfall [0,100] is almost the same among years from 1981 to 2010. The most frequent values of snowfall in this condition are 25, 50 and values between 0 and 25.
+
  
