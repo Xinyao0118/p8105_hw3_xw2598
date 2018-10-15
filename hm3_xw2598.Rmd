@@ -5,7 +5,7 @@ date: 2018-10-05
 output: github_document
 ---
 
-##problem1
+#problem1
 
 ```{r p1_dataset}
 #build a dataset
@@ -103,12 +103,12 @@ Comments:This plot shows (1)in each panel(response category),the differences bet
 #load data
 library(p8105.datasets)
 data(instacart)
-str(instacart)
-#write a short description of the dataset, noting the size and structure of the data, describing some key variables, and giving illstrative examples of observations.
-
+names(instacart)
+#This is a 1384617 rows * 15 cols dataset which indicates the information of costomers` order details and their products` details. 
+#The key variables include days_since_prior_order, aisle_id, department_id and so on.
+#For example,in var 'days_since_prior_order', each value means the gap days from this costomer`s last order to this one. The var 'department_id' shows which departments each product belong to, which can be studied to explore which departments is most sold.
 
 ```
-The goal is to do some exploration of this dataset. To that end, write a short description of the dataset, noting the size and structure of the data, describing some key variables, and giving illstrative examples of observations.
 
 ```{r p2_}
 #how many aisles are there, and which aisles are the most items ordered from?
