@@ -99,18 +99,19 @@ Comments:This plot shows (1)in each panel(response category),the differences bet
 
 ##problem 2
 
-```{r p2_description_unfinished}
+```{r p2_description}
 #load data
 library(p8105.datasets)
 data(instacart)
-names(instacart)
+nrow(instacart)
+ncol(instacart)
 #This is a 1384617 rows * 15 cols dataset which indicates the information of costomers` order details and their products` details. 
 #The key variables include days_since_prior_order, aisle_id, department_id and so on.
 #For example,in var 'days_since_prior_order', each value means the gap days from this costomer`s last order to this one. The var 'department_id' shows which departments each product belong to, which can be studied to explore which departments is most sold.
 
 ```
 
-```{r p2_}
+```{r p2}
 #how many aisles are there, and which aisles are the most items ordered from?
 nrow(distinct(instacart, aisle))
 instacart %>% 
@@ -153,18 +154,48 @@ pac_v = instacart %>%
    summarise( n = n()) %>% 
    arrange(n) %>% 
    tail(1)
-
+table_popular_item = tibble(
+  aisle = c("baking ingredients","dog food care","packaged vegetables fruits"),
+  most_popular_item = c("Light Brown Sugar", "Snack Sticks Chicken & Rice Recipe Dog Treats","Organic Baby Spinach")
+)
+table_popular_item
 #Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week;
-
+table_mean_hour = instacart %>% 
+  filter(product_name == "Pink Lady Apples"|product_name == "Coffee Ice Cream") %>% 
+  select(order_dow, product_name, order_hour_of_day) %>% 
+  group_by(product_name,order_dow) %>% 
+  summarise(mean_hour = mean(order_hour_of_day, na.rm = TRUE)) %>% 
+  spread(key = order_dow, value = mean_hour) 
+  table_mean_hour
 ```
 Comments:
 (1)There are 134 aisles, and the fresh vegetables is the most items ordered from. 
 (2)The Histogram shows roughly that two aisles have obviously more items than others and their id is between 20-25 and 80-85.Apart from this, we can see the distribution of the item numbers in each aisle arranged by their id number.  
+(3)The most popular item in aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits” is repectively "Light Brown Sugar", "Snack Sticks Chicken & Rice Recipe Dog Treats", "Organic Baby Spinach"
+(4)Except Sunday and Friday, Pink Lady Apples orderred mean hour is obviously smaller than that of Coffee Ice Cream. Also, Pink Lady Apples were orderred at noon in most of the day but  Coffee Ice Cream were orderred in the afternoon at most times.
 
-Make a table showing the most popular item aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”
+##problem3
+```{r p3_description}
+data(ny_noaa)
+ncol(ny_noaa)
+nrow(ny_noaa)
+arrange(ny_noaa,date) %>% head(1)
+arrange(ny_noaa,date) %>% tail(1)
+nrow(na.omit(select(ny_noaa,tmax,tmin)))/nrow(ny_noaa)
+nrow(na.omit(select(ny_noaa,prcp)))/nrow(ny_noaa)
+nrow(na.omit(select(ny_noaa,snow)))/nrow(ny_noaa)
+nrow(na.omit(select(ny_noaa,snwd)))/nrow(ny_noaa)
+```
+This is a 2595176 rows * 7 cols dataset which indicates the New York weather information from 1981-01-01 to 2010-12-31, such as precipitation,Snowfall,Snow depth, Maximum and minimum temperature, which were collected by New York state weather stations characterized by id number.
 
-Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).
+key varibales:'prcp' indicates precipitation,'snow' indicates Snowfall,'snwd' denotes Snow depth, 'tmax' and 'tmin' respectively denotes Maximum and minimum temperature.
+The missing value of 'tmax' and 'tmin' took 56% of total, so this became a serious issue. Beside this, the proportions of missing values of 'prcp','snow','snwd' were respectively 0.94,0.85,0.77.
 
+```{r p3_q2}
 
+```
 
+Do some data cleaning. Create separate variables for year, month, and day. Ensure observations for temperature, precipitation, and snowfall are given in reasonable units. For snowfall, what are the most commonly observed values? Why?
+Make a two-panel plot showing the average max temperature in January and in July in each station across years. Is there any observable / interpretable structure? Any outliers?
+Make a two-panel plot showing (i) tmax vs tmin for the full dataset (note that a scatterplot may not be the best option); and (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
  
