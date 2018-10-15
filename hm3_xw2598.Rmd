@@ -69,6 +69,7 @@ ny_brfss = brfss %>%
   ny_brfss
  
 ```
+
 Comments: During 2002,2006,2010 in NY, the Westchester County and New York County had  high "excellent" proportion with the low sd value compared with other counties. Most counties have an "excellent" proportion higher than 20 except Erie County, Bronx County and Queens County. In sd column there are 3 NA value, which is because the related county only were observed only once in specific years(2002,2006,2010).
 
 ```{r plot}
@@ -94,6 +95,7 @@ ggplot(tl_brfss,aes(x = year, y = averange, fill = locationabbr, color = locatio
         legend.text = element_text(size = 3)
         )
 ```
+
 Comments:This plot shows (1)in each panel(response category),the differences between most state-level proportion averages keep within 10%. (2)Obvious differences between different panels, which shows a overall tendency for all states that the percentages of responses are arranged in descending order :"Very good" >"good" >"Excellent" >"Fair" >"Poor".
 
 
@@ -105,11 +107,13 @@ library(p8105.datasets)
 data(instacart)
 nrow(instacart)
 ncol(instacart)
-#This is a 1384617 rows * 15 cols dataset which indicates the information of costomers` order details and their products` details. 
-#The key variables include days_since_prior_order, aisle_id, department_id and so on.
-#For example,in var 'days_since_prior_order', each value means the gap days from this costomer`s last order to this one. The var 'department_id' shows which departments each product belong to, which can be studied to explore which departments is most sold.
+str(instacart)
 
 ```
+
+This is a 1384617 rows * 15 cols dataset which indicates the information of costomers order details and their products` details. 
+The key variables include days_since_prior_order(int), aisle_id(int), department_id(int) and so on.
+For example,in var 'days_since_prior_order', each value means the gap days from this costomer`s last order to this one. The var 'department_id' shows which departments each product belong to, which can be studied to explore which departments is most sold.
 
 ```{r p2}
 #how many aisles are there, and which aisles are the most items ordered from?
@@ -168,6 +172,7 @@ table_mean_hour = instacart %>%
   spread(key = order_dow, value = mean_hour) 
   table_mean_hour
 ```
+
 Comments:
 (1)There are 134 aisles, and the fresh vegetables is the most items ordered from. 
 (2)The Histogram shows roughly that two aisles have obviously more items than others and their id is between 20-25 and 80-85.Apart from this, we can see the distribution of the item numbers in each aisle arranged by their id number.  
@@ -179,6 +184,7 @@ Comments:
 data(ny_noaa)
 ncol(ny_noaa)
 nrow(ny_noaa)
+str(ny_noaa)
 arrange(ny_noaa,date) %>% head(1)
 arrange(ny_noaa,date) %>% tail(1)
 nrow(na.omit(select(ny_noaa,tmax,tmin)))/nrow(ny_noaa)
@@ -186,9 +192,10 @@ nrow(na.omit(select(ny_noaa,prcp)))/nrow(ny_noaa)
 nrow(na.omit(select(ny_noaa,snow)))/nrow(ny_noaa)
 nrow(na.omit(select(ny_noaa,snwd)))/nrow(ny_noaa)
 ```
+
 This is a 2595176 rows * 7 cols dataset which indicates the New York weather information from 1981-01-01 to 2010-12-31, such as precipitation,Snowfall,Snow depth, Maximum and minimum temperature, which were collected by New York state weather stations characterized by id number.
 
-key varibales:'prcp' indicates precipitation,'snow' indicates Snowfall,'snwd' denotes Snow depth, 'tmax' and 'tmin' respectively denotes Maximum and minimum temperature.
+key varibales:'prcp'(int) indicates precipitation,'snow'(int) indicates Snowfall,'snwd'(int) denotes Snow depth, 'tmax'(chr) and 'tmin'(chr) respectively denotes Maximum and minimum temperature.
 The missing value of 'tmax' and 'tmin' took 56% of total, so this became a serious issue. Beside this, the proportions of missing values of 'prcp','snow','snwd' were respectively 0.94,0.85,0.77.
 
 ```{r p3_q1}
