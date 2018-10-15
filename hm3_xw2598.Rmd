@@ -191,7 +191,7 @@ This is a 2595176 rows * 7 cols dataset which indicates the New York weather inf
 key varibales:'prcp' indicates precipitation,'snow' indicates Snowfall,'snwd' denotes Snow depth, 'tmax' and 'tmin' respectively denotes Maximum and minimum temperature.
 The missing value of 'tmax' and 'tmin' took 56% of total, so this became a serious issue. Beside this, the proportions of missing values of 'prcp','snow','snwd' were respectively 0.94,0.85,0.77.
 
-```{r p3_q2}
+```{r p3_q1}
 new_noaa = ny_noaa %>% 
 #data cleaning
  janitor::clean_names() %>% 
@@ -213,10 +213,33 @@ new_noaa = ny_noaa %>%
 Comments:
 
 (1)For snowfall, 0 is the most commonly observed values. Because in summer,spring,autumn there is no snowfall and each observation of this dataset is counted by day. So the most observed value means the largest number of days this value was collected, that is why 0 is the most.
-```{r}
+
+```{r p3_q2}
+#Make a two-panel plot
+  new_noaa %>% 
+  filter(month == '01'|month == '07') %>% 
+   group_by(year,month) %>% 
+   summarise(
+   averange = mean(tmax,na.rm = TRUE)
+   ) %>% 
+   ggplot(aes(x = as.numeric(year),y = averange,color = month))+
+     geom_point()+
+  geom_smooth(se = FALSE)+
+   labs(
+      x = "Year",
+      y = "Average Max Temperature",
+      color = "month"
+  )+
+  theme(axis.text = element_text(size = 3))+
+     facet_grid(. ~ month)
 
 ```
 
 Make a two-panel plot showing the average max temperature in January and in July in each station across years. Is there any observable / interpretable structure? Any outliers?
+
+```{r q3_q3}
+
+```
+
 Make a two-panel plot showing (i) tmax vs tmin for the full dataset (note that a scatterplot may not be the best option); and (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
  
