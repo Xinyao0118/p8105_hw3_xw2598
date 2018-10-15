@@ -113,14 +113,56 @@ names(instacart)
 ```{r p2_}
 #how many aisles are there, and which aisles are the most items ordered from?
 nrow(distinct(instacart, aisle))
+instacart %>% 
+  count(aisle) %>% 
+  arrange(n) %>% 
+  tail()
+#Make a plot that shows the number of items ordered in each aisle.
+instacart %>% 
+  select(product_id,product_name,aisle_id,aisle) %>%  
+  ggplot(aes(x = aisle_id))+geom_histogram(alpha = .8)+
+  labs(
+    title = "Histogram",
+    x = "ID Number of aisles",
+    y = "Number of items"
+  )+
+  scale_x_continuous(
+    breaks = c(10,20,30,40,50,60,70,80,90,100,110,120,130,140),
+    labels = c(10,20,30,40,50,60,70,80,90,100,110,120,130,140)
+  )
+
+#Make a table showing the most popular item aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”
+bak_in = instacart %>% 
+  select(product_id,product_name,aisle_id,aisle) %>%  
+  filter(aisle == "baking ingredients") %>%  
+   group_by(aisle,product_name) %>% 
+   summarise( n = n()) %>% 
+   arrange(n) %>% 
+   tail(1)
+dog_f = instacart %>% 
+  select(product_id,product_name,aisle_id,aisle) %>%  
+  filter(aisle == "dog food care") %>%  
+   group_by(aisle,product_name) %>% 
+   summarise( n = n()) %>% 
+   arrange(n) %>% 
+   tail(1)
+pac_v = instacart %>% 
+  select(product_id,product_name,aisle_id,aisle) %>%  
+  filter(aisle == "packaged vegetables fruits") %>%  
+   group_by(aisle,product_name) %>% 
+   summarise( n = n()) %>% 
+   arrange(n) %>% 
+   tail(1)
+
+#Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week;
 
 ```
 Comments:
-(1)There are 134 aisles, and  
-Then, do or answer the following (commenting on the results of each):
-How many aisles are there, and which aisles are the most items ordered from?
-Make a plot that shows the number of items ordered in each aisle. Order aisles sensibly, and organize your plot so others can read it.
+(1)There are 134 aisles, and the fresh vegetables is the most items ordered from. 
+(2)The Histogram shows roughly that two aisles have obviously more items than others and their id is between 20-25 and 80-85.Apart from this, we can see the distribution of the item numbers in each aisle arranged by their id number.  
+
 Make a table showing the most popular item aisles “baking ingredients”, “dog food care”, and “packaged vegetables fruits”
+
 Make a table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week; format this table for human readers (i.e. produce a 2 x 7 table).
 
 
