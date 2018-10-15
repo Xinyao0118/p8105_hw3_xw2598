@@ -224,18 +224,20 @@ Comments:
    ) %>% 
    ggplot(aes(x = as.numeric(year),y = averange,color = month))+
      geom_point()+
-  geom_smooth(se = FALSE)+
+  geom_smooth(se = TRUE)+
    labs(
       x = "Year",
       y = "Average Max Temperature",
       color = "month"
   )+
-  theme(axis.text = element_text(size = 3))+
      facet_grid(. ~ month)
 
 ```
+Comments:
 
-Make a two-panel plot showing the average max temperature in January and in July in each station across years. Is there any observable / interpretable structure? Any outliers?
+From the plot we can see clearly that the averange max temperature in January was lower than in July, as the normal climate low in Northern Hemisphere. Across years, in July the averange Tmax had a smaller scale than that in January which means Tmax waved more extremely in winter than in summer during these years.  
+
+outliers:I considered those points which were out of the se scale and in the opposite tendency of the prior points as possible outliers. They include: The  averange Tmaxin January in 1994,2003.
 
 ```{r q3_q3}
 
